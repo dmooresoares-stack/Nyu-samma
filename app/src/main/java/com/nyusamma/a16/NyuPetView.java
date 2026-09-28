@@ -1,5 +1,4 @@
 package com.nyusamma.a16;
-package com.nyusamma.a16;
 
 import android.content.Context;
 import android.graphics.*;
