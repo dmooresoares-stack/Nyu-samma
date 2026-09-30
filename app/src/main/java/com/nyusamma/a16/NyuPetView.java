@@ -94,15 +94,20 @@ p.setColor(Color.rgb(62, 181, 73));
 p.setShadowLayer(3, 0, 2, 0x55000000);
 c.drawCircle(x, y, 12, p);
 p.clearShadowLayer();
-        } else if (state == State.BONE) {
+                } else if (state == State.BONE) {
+            float shift = (float) Math.sin(phase * 2f) * 3f;
             p.setColor(Color.WHITE);
             p.setShadowLayer(4, 0, 2, 0x66000000);
-            c.drawRoundRect(w - 54, photoBottom - 23,
-                    w - 22, photoBottom - 13, 6, 6, p);
-            c.drawCircle(w - 53, photoBottom - 23, 6, p);
-            c.drawCircle(w - 53, photoBottom - 13, 6, p);
-            c.drawCircle(w - 23, photoBottom - 23, 6, p);
-            c.drawCircle(w - 23, photoBottom - 13, 6, p);
+            c.save();
+            c.rotate((float) Math.sin(phase * 2f) * 5f,
+                    w - 38 + shift, photoBottom - 18);
+            c.drawRoundRect(w - 54 + shift, photoBottom - 23,
+                    w - 22 + shift, photoBottom - 13, 6, 6, p);
+            c.drawCircle(w - 53 + shift, photoBottom - 23, 6, p);
+            c.drawCircle(w - 53 + shift, photoBottom - 13, 6, p);
+            c.drawCircle(w - 23 + shift, photoBottom - 23, 6, p);
+            c.drawCircle(w - 23 + shift, photoBottom - 13, 6, p);
+            c.restore();
             p.clearShadowLayer();
         } else if (state == State.LISTENING) {
             p.setStyle(Paint.Style.STROKE);
