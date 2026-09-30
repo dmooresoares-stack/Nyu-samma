@@ -56,7 +56,6 @@ public class SpeechController implements RecognitionListener {
         handler.postDelayed(() -> {
             if (destroyed || paused || recognizer == null) return;
             try {
-                recognizer.cancel();
                 recognizer.startListening(recognizerIntent);
             } catch (Exception e) {
                 restartListening(1500);
@@ -77,9 +76,6 @@ public class SpeechController implements RecognitionListener {
                 if (now - lastWakeAt < 5000L) return;
                 lastWakeAt = now;
                 paused = true;
-                if (recognizer != null) {
-                    try { recognizer.cancel(); } catch (Exception ignored) {}
-                }
                 listener.onWakeWordDetected(raw);
                 return;
             }
