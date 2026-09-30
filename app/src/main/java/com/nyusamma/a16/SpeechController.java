@@ -120,7 +120,6 @@ public class SpeechController implements RecognitionListener {
     }
 
     @Override public void onPartialResults(Bundle partialResults) {
-        inspect(partialResults);
     }
 
     @Override public void onEvent(int eventType, Bundle params) {}
