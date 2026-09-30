@@ -76,8 +76,8 @@ public class SpeechController implements RecognitionListener {
                 if (now - lastWakeAt < 5000L) return;
                 lastWakeAt = now;
                 paused = true;
-                listener.onWakeWordDetected(raw);
-                return;
+listener.onWakeWordDetected(raw);
+return;
             }
         }
     }
