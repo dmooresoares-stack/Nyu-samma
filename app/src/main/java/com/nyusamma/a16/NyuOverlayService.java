@@ -91,7 +91,34 @@ public class NyuOverlayService extends Service implements SpeechController.Liste
     @Override
     public void onWakeWordDetected(String heardText) {
         if (petView != null) petView.setState(NyuPetView.State.LISTENING);
-        speak("Oi, Fofolete. Tô aqui.");
+                String command = heardText.toLowerCase(java.util.Locale.ROOT);
+        String reply;
+
+        if (command.contains("bolinha") || command.contains("brinc")) {
+            if (petView != null) petView.setState(NyuPetView.State.BALL);
+            reply = "Vamos brincar com a bolinha, Fofolete!";
+        } else if (command.contains("ossinho") || command.contains("osso")) {
+            if (petView != null) petView.setState(NyuPetView.State.BONE);
+            reply = "Hum, meu ossinho! Vou roer um pouquinho.";
+        } else if (command.contains("descansa") || command.contains("dormir")
+                || command.contains("sono")) {
+            if (petView != null) petView.setState(NyuPetView.State.REST);
+            reply = "Vou descansar pertinho de você.";
+        } else if (command.contains("bom dia")) {
+            reply = "Bom dia, Fofolete! Que Deus abençoe seu dia.";
+        } else if (command.contains("boa noite")) {
+            reply = "Boa noite, Fofolete. Fique bem pertinho de mim.";
+        } else {
+            reply = "Oi, Fofolete. Tô aqui com você!";
+        }
+
+        speak(reply);
+
+        new android.os.Handler(getMainLooper()).postDelayed(() -> {
+            if (speechController != null) {
+                speechController.resumeAfterReply(300);
+            }
+        }, Math.max(2600L, reply.length() * 70L));
     }
 
     @Override
