@@ -2,4 +2,3 @@
         return Math.round(value * getResources().getDisplayMetrics().density);
     }
 }
-public class
