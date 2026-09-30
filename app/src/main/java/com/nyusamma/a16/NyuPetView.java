@@ -56,6 +56,9 @@ public class NyuPetView extends View {
         float w = getWidth();
         float h = getHeight();
         float bob = (float) Math.sin(phase) * 2.5f;
+if (state == State.BALL || state == State.BONE) {
+    bob += (float) Math.sin(phase * 2.2f) * 2f;
+}
         float photoTop = 8 + bob;
         float photoBottom = h - 43 + bob;
         RectF photoRect = new RectF(8, photoTop, w - 8, photoBottom);
@@ -85,8 +88,12 @@ public class NyuPetView extends View {
         }
 
         if (state == State.BALL) {
-            p.setColor(Color.rgb(62, 181, 73));
-            c.drawCircle(w - 24, photoBottom - 18, 12, p);
+            float x = w - 24 - (float) Math.sin(phase * 1.4f) * 11f;
+float y = photoBottom - 18 - Math.abs((float) Math.sin(phase * 2.8f)) * 9f;
+p.setColor(Color.rgb(62, 181, 73));
+p.setShadowLayer(3, 0, 2, 0x55000000);
+c.drawCircle(x, y, 12, p);
+p.clearShadowLayer();
         } else if (state == State.BONE) {
             p.setColor(Color.WHITE);
             p.setShadowLayer(4, 0, 2, 0x66000000);
